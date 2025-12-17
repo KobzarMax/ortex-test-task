@@ -48,7 +48,10 @@ const useWebSocket = () => {
       wsRef.current.onclose = () => {
         console.log("WebSocket disconnected");
         setIsConnected(false);
-        reconnectTimeoutRef.current = setTimeout(connect, 3000);
+        reconnectTimeoutRef.current = setTimeout(
+          connect,
+          3000
+        ) as unknown as number;
       };
 
       wsRef.current.onerror = (error) => {
@@ -58,7 +61,10 @@ const useWebSocket = () => {
     } catch (error) {
       console.error("Failed to connect to WebSocket:", error);
       setIsConnected(false);
-      reconnectTimeoutRef.current = setTimeout(connect, 3000);
+      reconnectTimeoutRef.current = setTimeout(
+        connect,
+        3000
+      ) as unknown as number;
     }
   };
 
@@ -73,7 +79,7 @@ const useWebSocket = () => {
         wsRef.current.close();
       }
     };
-  }, []);
+  }, [connect]);
 
   return { data, isConnected };
 };
